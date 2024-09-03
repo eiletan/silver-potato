@@ -5,8 +5,17 @@ import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 import L from 'leaflet';
 import 'leaflet-defaulticon-compatibility';
 
-export default function Map() {
-    
+export default function Map(props) {
+
+    function renderMarkers() {
+        return props.images.map((image,i) => {
+            return (
+            <Marker position={image}>
+            </Marker>
+            );
+        })
+    }
+
     return (
         <div>
             <MapContainer
@@ -18,8 +27,9 @@ export default function Map() {
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                <Marker position={[34.6545, 135.4290]}>
-                </Marker>
+                {renderMarkers()}
+                
+                
             </MapContainer>
         </div>
     )
